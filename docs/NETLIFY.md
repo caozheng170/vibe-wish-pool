@@ -1,23 +1,76 @@
 # Netlify 部署指南 — Vibe Coding 许愿池
 
-## 方式 A：Git 连接（推荐）
+仓库：**https://github.com/caozheng170/vibe-wish-pool**
 
-### 1. 推送代码到 GitHub
+---
 
-```bash
+## 方式 C：Netlify CLI（本项目已内置）
+
+项目已安装 `netlify-cli`（devDependency），可用 npm scripts：
+
+| 命令 | 作用 |
+|------|------|
+| `npm run netlify:login` | 浏览器登录 Netlify 账号 |
+| `npm run netlify:init` | 创建/关联站点（连 GitHub 仓库） |
+| `npm run netlify:deploy:draft` | 构建 + 草稿部署（预览 URL） |
+| `npm run netlify:deploy` | 构建 + **生产部署** |
+| `npm run netlify:open` | 打开 Netlify 控制台 |
+| `npm run netlify:env` | 查看环境变量 |
+
+### CLI 首次部署流程
+
+```powershell
 cd d:\OPC
-git init
-git add .
-git commit -m "feat: vibe coding wish pool MVP"
-git remote add origin https://github.com/你的用户名/vibe-wish-pool.git
-git push -u origin main
+
+# 1. 登录（会打开浏览器）
+npm run netlify:login
+
+# 2. 初始化站点 — 选「Create & configure a new site」
+#    建议勾选 Link this site to Git → 选 caozheng170/vibe-wish-pool
+npm run netlify:init
+
+# 3. 设置环境变量（在 Netlify 网页或 CLI）
+npx netlify env:set VITE_SUPABASE_URL "https://xxx.supabase.co"
+npx netlify env:set VITE_SUPABASE_ANON_KEY "eyJ..."
+npx netlify env:set VITE_HF_SPACE_URL "https://your-space.hf.space"
+npx netlify env:set VITE_ADMIN_EMAIL "you@example.com"
+
+# 4. 生产部署（会本地 build 并上传 dist）
+npm run netlify:deploy
 ```
+
+`netlify init` 完成后会在项目根目录生成 `.netlify/`（已 gitignore），记录 site id。
+
+### 仅 CLI 手动部署（不连 Git 自动构建）
+
+```powershell
+npm run netlify:login
+npx netlify sites:create --name vibe-wish-pool-caozheng
+npx netlify link
+npm run netlify:deploy
+```
+
+### 环境变量 via CLI
+
+```powershell
+# 写入并触发重新部署
+npx netlify env:set VITE_ADMIN_EMAIL "you@example.com" --context production
+npx netlify deploy --prod --build
+```
+
+---
+
+## 方式 A：Git 连接（Dashboard，推荐持续集成）
+
+### 1. 代码已在 GitHub
+
+**https://github.com/caozheng170/vibe-wish-pool**
 
 ### 2. 在 Netlify 创建站点
 
 1. 打开 [https://app.netlify.com](https://app.netlify.com)
 2. **Add new site** → **Import an existing project**
-3. 选择 **GitHub** → 选中仓库 `vibe-wish-pool`
+3. 选择 **GitHub** → 选中仓库 `caozheng170/vibe-wish-pool`
 4. Netlify 会自动读取根目录 `netlify.toml`，无需手填 Build settings：
    - **Build command:** `npm run build`
    - **Publish directory:** `dist`
