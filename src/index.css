@@ -1,0 +1,111 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-deep: #050810;
+  --color-deep-light: #0a0e17;
+  --color-neon-cyan: #00f0ff;
+  --color-neon-purple: #7b61ff;
+  --color-neon-pink: #ff2d95;
+  --color-text-primary: #c8d6e5;
+  --color-text-muted: #6b7c93;
+  --color-status-red: #ff3b3b;
+  --color-status-yellow: #ffd24a;
+  --color-status-blue: #3d8bff;
+  --color-status-green: #00ff9d;
+  --font-display: 'Orbitron', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-deep);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(0, 240, 255, 0.03) 50%,
+    transparent 100%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  from {
+    background-position: 0 -100vh;
+  }
+  to {
+    background-position: 0 100vh;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 8px currentColor;
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 16px currentColor;
+  }
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.45);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #00f0ff 0%, #7b61ff 50%, #ff2d95 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanline::after {
+    animation: none;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
