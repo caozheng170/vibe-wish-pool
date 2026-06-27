@@ -11,13 +11,15 @@ git add .
 git commit -m "feat: vibe coding wish pool MVP with Netlify config"
 ```
 
-推送到 GitHub（替换为你的仓库地址）：
+推送到 GitHub（已创建）：
 
 ```powershell
-git remote add origin https://github.com/你的用户名/vibe-wish-pool.git
+git remote add origin https://github.com/caozheng170/vibe-wish-pool.git
 git branch -M main
 git push -u origin main
 ```
+
+仓库地址：**https://github.com/caozheng170/vibe-wish-pool**
 
 ## 阶段 2：HF Space（AI 后端）
 
