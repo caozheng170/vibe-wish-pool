@@ -12,7 +12,8 @@
     "netlify:deploy": "npm run build && netlify deploy --prod",
     "netlify:deploy:draft": "npm run build && netlify deploy",
     "netlify:open": "netlify open",
-    "netlify:env": "netlify env:list"
+    "netlify:env": "netlify env:list",
+    "hf:deploy": "py scripts/deploy_hf_space.py"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

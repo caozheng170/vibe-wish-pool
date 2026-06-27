@@ -1,5 +1,11 @@
 # HF Space 部署指南（Agnes AI 分析后端）
 
+**一键部署脚本：** [HF-SPACE-DEPLOY.md](./HF-SPACE-DEPLOY.md)
+
+目标 Space：**https://huggingface.co/spaces/caozheng/vibe-wish-analyzer**
+
+你的 HF 主页：[caozheng/spaces](https://huggingface.co/spaces/caozheng)
+
 ## 1. 创建 Space
 
 1. 打开 [https://huggingface.co/new-space](https://huggingface.co/new-space)
