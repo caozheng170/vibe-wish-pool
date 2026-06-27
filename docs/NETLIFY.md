@@ -2,6 +2,8 @@
 
 仓库：**https://github.com/caozheng170/vibe-wish-pool**
 
+Netlify 团队：**[pgraduate](https://app.netlify.com/teams/pgraduate/projects)**
+
 ---
 
 ## 方式 C：Netlify CLI（本项目已内置）
@@ -26,8 +28,13 @@ cd d:\OPC
 npm run netlify:login
 
 # 2. 初始化站点 — 选「Create & configure a new site」
+#    Team 选择：pgraduate
 #    建议勾选 Link this site to Git → 选 caozheng170/vibe-wish-pool
 npm run netlify:init
+
+# 或一步创建站点（指定团队 pgraduate）：
+# npx netlify sites:create --account-slug pgraduate --name vibe-wish-pool
+# npx netlify link
 
 # 3. 设置环境变量（在 Netlify 网页或 CLI）
 npx netlify env:set VITE_SUPABASE_URL "https://xxx.supabase.co"
@@ -68,9 +75,10 @@ npx netlify deploy --prod --build
 
 ### 2. 在 Netlify 创建站点
 
-1. 打开 [https://app.netlify.com](https://app.netlify.com)
-2. **Add new site** → **Import an existing project**
-3. 选择 **GitHub** → 选中仓库 `caozheng170/vibe-wish-pool`
+团队 Dashboard：**https://app.netlify.com/teams/pgraduate/projects**
+
+1. 打开上方链接 → **Add new site** → **Import an existing project**
+2. 选择 **GitHub** → 选中仓库 `caozheng170/vibe-wish-pool`
 4. Netlify 会自动读取根目录 `netlify.toml`，无需手填 Build settings：
    - **Build command:** `npm run build`
    - **Publish directory:** `dist`

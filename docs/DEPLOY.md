@@ -41,7 +41,7 @@ git push -u origin main
 
 ## 阶段 4：Netlify（前端）
 
-详见 **[NETLIFY.md](./NETLIFY.md)**
+团队：**[pgraduate](https://app.netlify.com/teams/pgraduate/projects)** · 详见 **[NETLIFY.md](./NETLIFY.md)**
 
 - [ ] Import GitHub 仓库
 - [ ] 环境变量：
