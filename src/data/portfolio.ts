@@ -37,14 +37,14 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     slug: 'contract-generator',
     title: '范本合同生成工具平台',
-    tagline: 'ContractFlow Enterprise · 21 页预览 · Word 导出',
+    tagline: 'ContractFlow Enterprise · 21 页 1:1 预览 · Word 导出',
     url: 'https://resilient-halva-5e66c5.netlify.app/',
     description:
-      '装备定规采购类标准合同在线填写，支持离子溅射机、螺杆空压机、工业机械臂等行业模板，高拟真 PDF 预览并导出 Word。',
+      '设备采购与安装调试买卖合同在线填写：左侧六步向导录入，右侧 21 页标准排版实时预览，字段高亮联动，一键导出 Word。',
     features: [
-      '六步向导：基本信息 → 部件 → 备品 → 付款质保 → 交货 → 签署',
-      '多行业装备模板一键载入',
-      '21 页标准合同 PDF 预览',
+      '六步向导：基本信息 → 附件明细 → 商务条件 → 付款质保 → 交货验收 → 签署盖章',
+      '行业模板一键载入：离子离心机、螺杆空压机、工业机械臂等',
+      '21 页 1:1 Word 对应预览，分页浏览',
       '导出标准 Word 文档',
     ],
     initial_prompt: `法务部给了设备采购合同模板，我想做一个应用：业务员填好必填字段后，系统自动把内容填入 Word 模板，生成最终合同文档。
@@ -70,7 +70,7 @@ export const portfolioProjects: PortfolioProject[] = [
     tech_tags: ['Google AI Studio', '合同生成', 'Word 导出', 'PDF 模板'],
     ai_path: 1,
     platform_note: 'PLATFORM: Google AI Studio · OUTPUT: .docx',
-    screenshot_url: '/portfolio/contract-generator.svg',
+    screenshot_url: '/portfolio/contract-generator.png',
     featured: true,
     sort_order: 2,
   },
