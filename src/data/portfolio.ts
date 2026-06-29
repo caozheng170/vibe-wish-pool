@@ -3,16 +3,16 @@ import type { PortfolioProject } from '../types/portfolio';
 export const portfolioProjects: PortfolioProject[] = [
   {
     slug: 'supplier-screening',
-    title: '供应商智能筛选平台',
-    tagline: 'Excel 双表上传，多维度条件匹配供应商',
+    title: '供应商智能匹配平台',
+    tagline: '支持多参投标表 · Excel 双表筛选匹配历史招投标',
     url: 'https://chipper-buttercream-dc9dbb.netlify.app/',
     description:
-      '面向采购/招标场景：上传供应商信息表与投标中标表，按产品、地址、资质、注册资本等条件自动筛选匹配，并统计投标/中标次数。',
+      '面向采购/招标场景：上传供应商信息表与投标/中标表，按产品、地址、资质、注册资本层层筛选，再跨表匹配历史投标记录，并输出处理日志。',
     features: [
-      '供应商信息表 + 投标/中标表（多文件）Excel 上传',
-      '产品名称匹配主营或招标项目名称',
-      '联系地址、供应商资质、最低注册资本多维筛选',
-      '跨表匹配投标单位/中标单位并统计次数',
+      '文件1 供应商信息表 + 文件2 投标/中标表（支持多文件）',
+      '产品名称、联系地址、资质、最低注册资本多维筛选',
+      '跨表匹配投标单位/中标单位',
+      '实时处理日志，解析行数与匹配进度可视',
     ],
     initial_prompt: `手头有2个excel文件，都是多sheet的：文件1是供应商信息表，几个sheet的表头大致相同，来自表1里的筛选条件包含4项：字段名分别为「供应商主营」、「注册资本」、「供应商资质」、「联系地址」。
 
@@ -27,10 +27,10 @@ export const portfolioProjects: PortfolioProject[] = [
 查询结果把匹配到的行里各字段信息都带出来，比如：招标项目名称、投标单位/中标单位、中标单价、中标总价等，并且能直观显示他参与投标了几次、中标过几次。
 
 我需要做这么一个平台：只要我上传2个表格文件，并填入至少1个筛选条件，就能快速帮助我筛选出来。全程不需要用到模型，只是代替原先在excel里的多次筛选动作及2个表格文件里来回辅助的反复和累赘过程。`,
-    tech_tags: ['Excel', 'React', 'TypeScript', 'Vite', '供应商筛选'],
+    tech_tags: ['Excel', '招投标', '供应商筛选', 'Netlify'],
     ai_path: 1,
     platform_note: 'PLATFORM: Gemini · NO LLM IN RUNTIME',
-    screenshot_url: '/portfolio/supplier-screening.svg',
+    screenshot_url: '/portfolio/supplier-screening.png',
     featured: true,
     sort_order: 1,
   },

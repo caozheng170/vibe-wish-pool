@@ -4,6 +4,7 @@ import type { PortfolioProject } from '../../types/portfolio';
 import { GlassPanel } from '../ui/GlassPanel';
 import { NeonButton } from '../ui/NeonButton';
 import { TerminalBlock } from '../ui/TerminalBlock';
+import { ProjectScreenshot } from './ProjectScreenshot';
 
 interface ProjectCardProps {
   project: PortfolioProject;
@@ -20,13 +21,8 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
       whileHover={{ y: -4 }}
     >
       <GlassPanel className="flex h-full flex-col">
-        <div className="mb-4 flex aspect-video items-center justify-center overflow-hidden rounded-lg border border-neon-cyan/10 bg-gradient-to-br from-deep-light to-neon-purple/10">
-          <div className="text-center">
-            <p className="font-display text-2xl tracking-widest text-neon-cyan/80">
-              {project.title.slice(0, 2).toUpperCase()}
-            </p>
-            <p className="mt-1 font-mono text-xs text-text-muted">{project.slug}</p>
-          </div>
+        <div className="mb-4 aspect-video overflow-hidden rounded-lg border border-neon-cyan/10 bg-deep-light">
+          <ProjectScreenshot project={project} />
         </div>
 
         <div className="mb-2 flex flex-wrap gap-2">

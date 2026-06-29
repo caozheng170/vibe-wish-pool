@@ -4,6 +4,7 @@ import { GlassPanel } from '../components/ui/GlassPanel';
 import { NeonButton } from '../components/ui/NeonButton';
 import { TerminalBlock } from '../components/ui/TerminalBlock';
 import { PathCategoryBadge } from '../components/wish/PathCategoryBadge';
+import { ProjectScreenshot } from '../components/portfolio/ProjectScreenshot';
 
 interface Props {
   slug: string;
@@ -40,7 +41,13 @@ export function ProjectDetail({ slug }: Props) {
         <PathCategoryBadge path={project.ai_path} />
       </div>
 
-      <GlassPanel className="mt-8">
+      <GlassPanel className="mt-6 overflow-hidden p-0">
+        <div className="aspect-video border-b border-white/5">
+          <ProjectScreenshot project={project} />
+        </div>
+      </GlassPanel>
+
+      <GlassPanel className="mt-6">
         <p className="leading-relaxed text-text-primary">{project.description}</p>
         <ul className="mt-6 space-y-2">
           {project.features.map((f) => (
