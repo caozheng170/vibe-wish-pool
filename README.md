@@ -68,4 +68,6 @@ CLOUD_TEXT_MODEL=agnes-2.0-flash
 3. 改环境变量后 **Clear cache and redeploy**
 4. Supabase 配置 Site URL / Redirect URLs 为你的 Netlify 域名
 
-`netlify.toml` 已包含：Node 20、SPA 路由、静态资源缓存、安全响应头。
+**站点（生产）：** https://famous-pegasus-a71b51.netlify.app/
+
+**环境变量配置清单：** [docs/PRODUCTION-CONFIG.md](./docs/PRODUCTION-CONFIG.md)
