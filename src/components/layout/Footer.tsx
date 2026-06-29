@@ -8,9 +8,6 @@ export function Footer() {
           <p className="font-display text-xs tracking-widest text-text-muted">
             {SITE_NAME}
           </p>
-          <p className="mt-1 font-mono text-[10px] text-text-muted/70">
-            NETLIFY FRONTEND · HF SPACE AI · SUPABASE DATA
-          </p>
         </div>
         <p className="font-mono text-[10px] text-text-muted">
           把工作中的痛点，编译成下一个工具 ·{' '}
