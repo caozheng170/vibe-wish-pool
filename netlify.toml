@@ -8,6 +8,8 @@
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps=false"
   VITE_HF_SPACE_URL = "https://caozheng-vibe-wish-analyzer.hf.space"
+  VITE_SUPABASE_URL = "https://udteeihtlxjfulzqycjt.supabase.co"
+  VITE_ADMIN_EMAIL = "4701823@qq.com"
 
 # SPA：React Router 客户端路由
 [[redirects]]

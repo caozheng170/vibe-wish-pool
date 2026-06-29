@@ -1,52 +1,58 @@
--- Supabase SQL: 在 SQL Editor 中执行
+-- Supabase SQL: 可重复执行（SQL Editor 中 Run）
 
-create type wish_status as enum ('red', 'yellow', 'blue', 'green');
+-- 1. 枚举类型（已存在则跳过）
+DO $$ BEGIN
+  CREATE TYPE wish_status AS ENUM ('red', 'yellow', 'blue', 'green');
+EXCEPTION
+  WHEN duplicate_object THEN NULL;
+END $$;
 
-create table if not exists public.wishes (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references auth.users(id) on delete cascade,
-  title text not null check (char_length(title) >= 2),
-  description text not null check (char_length(description) >= 10),
-  status wish_status not null default 'red',
-  ai_path smallint check (ai_path between 1 and 5),
+-- 2. 表
+CREATE TABLE IF NOT EXISTS public.wishes (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  title text NOT NULL CHECK (char_length(title) >= 2),
+  description text NOT NULL CHECK (char_length(description) >= 10),
+  status wish_status NOT NULL DEFAULT 'red',
+  ai_path smallint CHECK (ai_path BETWEEN 1 AND 5),
   ai_analysis jsonb,
   owner_reply text,
-  created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
 );
 
-create index if not exists wishes_status_idx on public.wishes(status);
-create index if not exists wishes_created_idx on public.wishes(created_at desc);
+CREATE INDEX IF NOT EXISTS wishes_status_idx ON public.wishes(status);
+CREATE INDEX IF NOT EXISTS wishes_created_idx ON public.wishes(created_at DESC);
 
-alter table public.wishes enable row level security;
+ALTER TABLE public.wishes ENABLE ROW LEVEL SECURITY;
 
--- 所有人可读（公开许愿墙）
-create policy "wishes_select_public"
-  on public.wishes for select
-  using (true);
+-- 3. RLS 策略（先删后建，避免重复报错）
+DROP POLICY IF EXISTS "wishes_select_public" ON public.wishes;
+CREATE POLICY "wishes_select_public"
+  ON public.wishes FOR SELECT
+  USING (true);
 
--- 登录用户可创建自己的许愿
-create policy "wishes_insert_own"
-  on public.wishes for insert
-  with check (auth.uid() = user_id);
+DROP POLICY IF EXISTS "wishes_insert_own" ON public.wishes;
+CREATE POLICY "wishes_insert_own"
+  ON public.wishes FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
 
--- 用户只能更新自己的 ai_analysis（HF 分析结果写回）
-create policy "wishes_update_own_analysis"
-  on public.wishes for update
-  using (auth.uid() = user_id)
-  with check (auth.uid() = user_id);
+DROP POLICY IF EXISTS "wishes_update_own_analysis" ON public.wishes;
+CREATE POLICY "wishes_update_own_analysis"
+  ON public.wishes FOR UPDATE
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
 
--- 管理员通过 service role 或单独 admin 策略更新 status/owner_reply
--- 生产环境建议用 Edge Function + service key，或设置 admin user_id 白名单
+-- 4. 更新时间触发器
+CREATE OR REPLACE FUNCTION public.set_updated_at()
+RETURNS trigger AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
-create or replace function public.set_updated_at()
-returns trigger as $$
-begin
-  new.updated_at = now();
-  return new;
-end;
-$$ language plpgsql;
-
-create trigger wishes_updated_at
-  before update on public.wishes
-  for each row execute function public.set_updated_at();
+DROP TRIGGER IF EXISTS wishes_updated_at ON public.wishes;
+CREATE TRIGGER wishes_updated_at
+  BEFORE UPDATE ON public.wishes
+  FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();

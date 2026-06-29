@@ -1,10 +1,10 @@
--- 管理员可更新任意许愿（status / owner_reply 等）
--- ⚠️ 将 REPLACE_WITH_ADMIN_EMAIL 换成你的邮箱（与 VITE_ADMIN_EMAIL 一致）
-create policy "wishes_update_admin"
-  on public.wishes for update
-  using (
-    lower(coalesce(auth.jwt() ->> 'email', '')) = lower('REPLACE_WITH_ADMIN_EMAIL')
+-- 管理员策略（邮箱与 VITE_ADMIN_EMAIL 一致）
+DROP POLICY IF EXISTS "wishes_update_admin" ON public.wishes;
+CREATE POLICY "wishes_update_admin"
+  ON public.wishes FOR UPDATE
+  USING (
+    lower(coalesce(auth.jwt() ->> 'email', '')) = lower('4701823@qq.com')
   )
-  with check (
-    lower(coalesce(auth.jwt() ->> 'email', '')) = lower('REPLACE_WITH_ADMIN_EMAIL')
+  WITH CHECK (
+    lower(coalesce(auth.jwt() ->> 'email', '')) = lower('4701823@qq.com')
   );
