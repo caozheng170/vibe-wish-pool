@@ -30,11 +30,19 @@ export function Admin() {
 
   if (authLoading) return null;
 
-  if (isConfigured && !user) {
+  if (!isConfigured) {
+    return (
+      <div className="mx-auto max-w-2xl px-4 py-20 text-center">
+        <p className="text-text-muted">管理后台需先配置 Supabase</p>
+      </div>
+    );
+  }
+
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  if (isConfigured && !isAdmin) {
+  if (!isAdmin) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-20 text-center">
         <p className="text-text-muted">无管理权限</p>
@@ -67,7 +75,7 @@ export function Admin() {
       <p className="font-mono text-xs text-neon-pink">ADMIN // CONTROL NODE</p>
       <h1 className="mt-2 font-display text-3xl tracking-wide">任务控制面板</h1>
       <p className="mt-2 text-sm text-text-muted">
-        登录身份：{user?.email ?? 'demo'} · 更新状态灯与人工回复
+        登录身份：{user.email} · 更新状态灯与人工回复
       </p>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
