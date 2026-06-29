@@ -201,7 +201,29 @@ UI：
       '代表作品集：云团小太阳、小学生啦等',
       'Internal Composer 背景灵感音乐',
     ],
-    initial_prompt: '【待补充首批提示词】',
+    initial_prompt: `帮我制作一个网页，标题是"QAZ AI音乐创作工坊"。
+
+作为 AI 音乐生成，首先是歌词生成和提示词生成，为此我做了 2 个工作流，链接分别是：
+
+歌词生成：
+http://61.153.53.186:3005/chat/flow/9e7c5d437b414d91aa6f807a7e7fcf48
+
+风格提示词生成：
+http://61.153.53.186:3005/chat/flow/8b689571b0a84a0092112d587eb83e5a
+
+将其融入到网页，并能点击后跳转链接，方便打开他们。
+
+接着下方可以挂 2 个 AI 音乐创作平台的链接，分别是 Suno 平台和妙响平台，链接分别是：
+https://suno.com/create
+https://music.douyin.com/studio/create
+
+当然 Suno 平台那里得在旁边注一个小圈符号，用鼠标悬停后小字提示"国内网络无法点击打开"。
+
+另外下方再挂上 2 个我的音乐代表作，歌曲分别是《云团小太阳》和《小学生啦》，这 2 首歌曲的播放链接分别是：
+https://music.163.com/#/song?id=3343859105
+《小学生啦》@汽水音乐 https://qishui.douyin.com/s/iQXeNGpK/
+
+网页得做的炫酷，时尚，潮流感十足。`,
     tech_tags: ['AI 音乐', 'Suno', '歌词', '创作工作流'],
     ai_path: 2,
     screenshot_url: '/portfolio/qaz-music-studio.png',
