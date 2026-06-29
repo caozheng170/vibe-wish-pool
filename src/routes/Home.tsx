@@ -32,7 +32,7 @@ export function Home() {
           transition={{ delay: 0.1 }}
           className="mt-4 font-display text-4xl font-bold tracking-wide md:text-6xl"
         >
-          <span className="gradient-text glow-text">把痛点编译成工具</span>
+          <span className="gradient-text glow-text">你提痛点/需求  我做工具/应用</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -40,7 +40,8 @@ export function Home() {
           transition={{ delay: 0.2 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-text-muted"
         >
-          浏览已落地的 Vibe Coding 项目，或在许愿池发射你的下一个工具需求。
+          浏览已落地的 Vibe Coding（氛围编程） 项目，或在许愿池发射你的工具需求。
+          <br />
           AI 初筛 + 人工跟进，从红灯到绿灯。
         </motion.p>
         <motion.div
