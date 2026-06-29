@@ -66,7 +66,7 @@ export function Home() {
         <div className="mb-8 flex items-end justify-between">
           <div>
             <p className="font-mono text-xs text-neon-cyan">ARCHIVE // DEPLOYED</p>
-            <h2 className="font-display text-2xl tracking-wide">已落地任务档案</h2>
+            <h2 className="font-display text-2xl tracking-wide">已完成的代表性应用网站工具</h2>
           </div>
           <Link to="/portfolio" className="font-mono text-xs text-neon-cyan hover:underline">
             查看全部 →
