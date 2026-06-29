@@ -15,11 +15,15 @@ SPACE_DIR = Path(__file__).resolve().parent.parent / "hf-space"
 
 def main() -> None:
     token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
-    if not token:
+    api = HfApi(token=token) if token else HfApi()
+
+    try:
+        who = api.whoami()
+        print(f"Logged in as: {who.get('name', who)}")
+    except Exception:
         print(
-            "Error: set HF_TOKEN (write access).\n"
-            "Create at https://huggingface.co/settings/tokens\n"
-            "Or run: hf auth login",
+            "Error: not logged in. Run: hf auth login\n"
+            "Or set HF_TOKEN from https://huggingface.co/settings/tokens",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -27,8 +31,6 @@ def main() -> None:
     if not SPACE_DIR.is_dir():
         print(f"Error: {SPACE_DIR} not found", file=sys.stderr)
         sys.exit(1)
-
-    api = HfApi(token=token)
 
     print(f"Creating Space {REPO_ID} (docker)...")
     api.create_repo(
