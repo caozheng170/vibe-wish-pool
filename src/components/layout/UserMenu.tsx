@@ -49,7 +49,7 @@ export function UserMenu() {
   if (!user) {
     return (
       <NeonButton to="/login" variant="ghost">
-        接入身份
+        登录/注册
       </NeonButton>
     );
   }
