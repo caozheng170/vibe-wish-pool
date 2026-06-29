@@ -13,6 +13,7 @@
   --color-status-blue: #3d8bff;
   --color-status-green: #00ff9d;
   --font-display: 'Orbitron', system-ui, sans-serif;
+  --font-latin: 'Rajdhani', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
@@ -40,6 +41,12 @@ body {
 
 .font-display {
   font-family: var(--font-display);
+}
+
+.font-latin {
+  font-family: var(--font-latin);
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 .font-mono {

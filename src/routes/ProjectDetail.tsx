@@ -5,6 +5,7 @@ import { NeonButton } from '../components/ui/NeonButton';
 import { TerminalBlock } from '../components/ui/TerminalBlock';
 import { PathCategoryBadge } from '../components/wish/PathCategoryBadge';
 import { ProjectScreenshot } from '../components/portfolio/ProjectScreenshot';
+import { ProjectTitle } from '../components/portfolio/ProjectTitle';
 
 interface Props {
   slug: string;
@@ -33,8 +34,12 @@ export function ProjectDetail({ slug }: Props) {
       <div className="mt-6 flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="font-mono text-xs text-text-muted">{project.slug}</p>
-          <h1 className="mt-2 font-display text-3xl tracking-wide md:text-4xl">
-            {project.title}
+          <h1 className="mt-2 text-3xl tracking-wide md:text-4xl">
+            <ProjectTitle
+              title={project.title}
+              latinClassName="font-latin text-3xl md:text-4xl"
+              chineseClassName="font-body text-3xl font-semibold md:text-4xl"
+            />
           </h1>
           <p className="mt-2 text-neon-cyan">{project.tagline}</p>
         </div>

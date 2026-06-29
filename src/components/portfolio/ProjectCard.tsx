@@ -4,6 +4,7 @@ import type { PortfolioProject } from '../../types/portfolio';
 import { GlassPanel } from '../ui/GlassPanel';
 import { TerminalBlock } from '../ui/TerminalBlock';
 import { ProjectScreenshot } from './ProjectScreenshot';
+import { ProjectTitle } from './ProjectTitle';
 
 interface ProjectCardProps {
   project: PortfolioProject;
@@ -35,8 +36,8 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
           ))}
         </div>
 
-        <h3 className="font-display text-lg tracking-wide text-text-primary">
-          {project.title}
+        <h3 className="text-lg tracking-wide text-text-primary">
+          <ProjectTitle title={project.title} />
         </h3>
         <p className="mt-1 text-sm text-neon-cyan/80">{project.tagline}</p>
         <p className="mt-3 flex-1 text-sm leading-relaxed text-text-muted">
@@ -69,7 +70,9 @@ export function ProjectCardCompact({ project }: { project: PortfolioProject }) {
   return (
     <Link to={`/portfolio/${project.slug}`}>
       <GlassPanel className="transition hover:border-neon-cyan/40">
-        <h3 className="font-display text-sm tracking-wide">{project.title}</h3>
+        <h3 className="text-sm tracking-wide">
+          <ProjectTitle title={project.title} latinClassName="font-latin text-sm" />
+        </h3>
         <p className="mt-1 text-xs text-text-muted">{project.tagline}</p>
       </GlassPanel>
     </Link>
