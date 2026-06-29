@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import type { PortfolioProject } from '../../types/portfolio';
 import { GlassPanel } from '../ui/GlassPanel';
-import { NeonButton } from '../ui/NeonButton';
 import { TerminalBlock } from '../ui/TerminalBlock';
 import { ProjectScreenshot } from './ProjectScreenshot';
 
@@ -52,19 +51,14 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
 
         <div className="mt-4 space-y-3">
           <TerminalBlock>{project.initial_prompt}</TerminalBlock>
-          <div className="flex flex-wrap gap-2">
-            <NeonButton to={`/portfolio/${project.slug}`} variant="ghost">
-              查看档案
-            </NeonButton>
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center rounded-lg border border-neon-pink/40 px-4 py-2 font-display text-xs tracking-widest text-neon-pink uppercase transition hover:bg-neon-pink/10"
-            >
-              在线访问 ↗
-            </a>
-          </div>
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center rounded-lg border border-neon-pink/40 px-4 py-2 font-display text-xs tracking-widest text-neon-pink uppercase transition hover:bg-neon-pink/10"
+          >
+            在线访问 ↗
+          </a>
         </div>
       </GlassPanel>
     </motion.div>
