@@ -8,6 +8,33 @@ interface FixedFeaturedCardsProps {
   projects: PortfolioProject[];
 }
 
+const CARD_ACCENTS = [
+  {
+    titleCn: 'text-neon-cyan drop-shadow-[0_0_16px_rgba(0,240,255,0.28)]',
+    titleLatin: 'text-neon-cyan drop-shadow-[0_0_16px_rgba(0,240,255,0.28)]',
+    taglineTail: 'text-neon-cyan/85',
+  },
+  {
+    titleCn: 'text-neon-purple/95 drop-shadow-[0_0_16px_rgba(123,97,255,0.28)]',
+    titleLatin: 'text-neon-purple/95 drop-shadow-[0_0_16px_rgba(123,97,255,0.28)]',
+    taglineTail: 'text-neon-purple/85',
+  },
+  {
+    titleCn: 'text-[#c8d6e5]',
+    titleLatin: 'gradient-text glow-text',
+    taglineTail: 'text-neon-pink/80',
+  },
+] as const;
+
+function splitTagline(tagline: string): { lead: string; tail: string | null } {
+  const idx = tagline.indexOf('·');
+  if (idx === -1) return { lead: tagline, tail: null };
+  return {
+    lead: tagline.slice(0, idx).trim(),
+    tail: tagline.slice(idx + 1).trim(),
+  };
+}
+
 export function FixedFeaturedCards({ projects }: FixedFeaturedCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -75,17 +102,33 @@ export function FixedFeaturedCards({ projects }: FixedFeaturedCardsProps) {
         ref={gridRef}
         className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3 md:gap-10"
       >
-        {projects.slice(0, 3).map((project) => (
-          <article key={project.slug} className="text-left">
-            <Link
-              to={`/portfolio/${project.slug}`}
-              className="block transition hover:opacity-90"
-            >
-              <h3 className="text-xl font-semibold tracking-tight text-white md:text-2xl">
-                <ProjectTitle title={project.title} />
-              </h3>
-            </Link>
-            <p className="mt-3 text-sm leading-relaxed text-[#d1d5db]">{project.tagline}</p>
+        {projects.slice(0, 3).map((project, index) => {
+          const accent = CARD_ACCENTS[index] ?? CARD_ACCENTS[0];
+          const { lead, tail } = splitTagline(project.tagline);
+
+          return (
+            <article key={project.slug} className="text-left">
+              <Link
+                to={`/portfolio/${project.slug}`}
+                className="block transition hover:opacity-90"
+              >
+                <h3 className="font-display text-xl font-bold tracking-wide md:text-2xl">
+                  <ProjectTitle
+                    title={project.title}
+                    chineseClassName={`font-body font-semibold ${accent.titleCn}`}
+                    latinClassName={`font-latin ${accent.titleLatin}`}
+                  />
+                </h3>
+              </Link>
+              <p className="mt-3 text-sm leading-relaxed">
+                <span className="text-[#9ca3af]">{lead}</span>
+                {tail && (
+                  <>
+                    <span className="text-text-muted/40"> · </span>
+                    <span className={accent.taglineTail}>{tail}</span>
+                  </>
+                )}
+              </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <a
                 href={project.url}
@@ -103,7 +146,8 @@ export function FixedFeaturedCards({ projects }: FixedFeaturedCardsProps) {
               </Link>
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

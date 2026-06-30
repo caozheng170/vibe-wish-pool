@@ -8,6 +8,13 @@ import { SectionReveal } from '../components/home/SectionReveal';
 import { useHeroScrollFade } from '../hooks/useHeroScrollFade';
 import { CARDS_TRIGGER_ID } from '../lib/homeScroll';
 
+const STEP_TITLE_COLORS = [
+  'text-neon-cyan/90',
+  'text-neon-purple/90',
+  'text-status-yellow/90',
+  'text-status-green/90',
+] as const;
+
 const steps = [
   { n: '01', title: '描述需求', desc: '登录后描述工具需求或流程痛点' },
   { n: '02', title: 'Agnes 分析', desc: 'AI 判断可行性并给出实现路径' },
@@ -50,13 +57,7 @@ export function Home() {
               </span>
               <span className="mt-2 block md:mt-3">
                 <span className="text-[#8b9cb3]">我做</span>
-                <span className="relative ml-1.5 inline-block">
-                  <span
-                    className="absolute bottom-1 left-0 h-2.5 w-full rounded-sm bg-gradient-to-r from-neon-cyan/55 via-neon-purple/45 to-neon-pink/35 md:bottom-1.5 md:h-3"
-                    aria-hidden
-                  />
-                  <span className="gradient-text glow-text relative">工具/应用</span>
-                </span>
+                <span className="gradient-text glow-text ml-1.5">工具/应用</span>
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-[#9ca3af] md:text-base">
@@ -98,15 +99,30 @@ export function Home() {
         <div id={CARDS_TRIGGER_ID} className="h-[200vh]" aria-hidden />
         <div className="h-[100vh]" aria-hidden />
 
-        <SectionReveal subtitle="PROTOCOL // HOW IT WORKS" title="许愿池运作流程">
+        <SectionReveal
+          subtitle="PROTOCOL // HOW IT WORKS"
+          title={
+            <>
+              <span className="text-neon-cyan drop-shadow-[0_0_20px_rgba(0,240,255,0.3)]">
+                许愿池
+              </span>
+              <span className="text-[#8b9cb3]">运作</span>
+              <span className="text-neon-purple/90 drop-shadow-[0_0_18px_rgba(123,97,255,0.25)]">
+                流程
+              </span>
+            </>
+          }
+        >
           <div className="mx-auto grid max-w-3xl gap-6 text-left sm:grid-cols-2">
-            {steps.map((step) => (
+            {steps.map((step, index) => (
               <div
                 key={step.n}
                 className="rounded-lg border border-white/10 bg-black/30 p-5 backdrop-blur-sm"
               >
                 <p className="font-display text-lg text-neon-cyan/50">{step.n}</p>
-                <h3 className="mt-1 font-display text-sm tracking-wide text-white">
+                <h3
+                  className={`mt-1 font-display text-sm tracking-wide ${STEP_TITLE_COLORS[index] ?? 'text-[#c8d6e5]'}`}
+                >
                   {step.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#9ca3af]">{step.desc}</p>

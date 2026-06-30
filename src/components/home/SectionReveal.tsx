@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 interface SectionRevealProps {
   subtitle: string;
-  title: string;
+  title: ReactNode;
   children?: ReactNode;
 }
 
@@ -35,8 +35,10 @@ export function SectionReveal({ subtitle, title, children }: SectionRevealProps)
           visible ? 'translate-y-0 opacity-100 blur-0' : 'translate-y-8 opacity-0 blur-md'
         }`}
       >
-        <p className="font-mono text-sm tracking-widest text-[#d1d5db]">{subtitle}</p>
-        <h2 className="mt-3 font-display text-3xl font-bold tracking-wide text-white md:text-5xl lg:text-6xl">
+        <p className="font-mono text-xs tracking-[0.25em] text-neon-purple/75 uppercase">
+          {subtitle}
+        </p>
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-wide md:text-5xl lg:text-6xl">
           {title}
         </h2>
         {children && <div className="mt-12">{children}</div>}
