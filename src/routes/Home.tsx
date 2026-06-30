@@ -1,148 +1,115 @@
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { getFeaturedProjects } from '../data/portfolio';
-import { ProjectCard } from '../components/portfolio/ProjectCard';
-import { GlassPanel } from '../components/ui/GlassPanel';
 import { NeonButton } from '../components/ui/NeonButton';
-import { StatusOrb } from '../components/ui/StatusOrb';
-import { HeroAmbientCanvas } from '../components/home/HeroAmbientCanvas';
+import { ScrollVideoBackground } from '../components/home/ScrollVideoBackground';
+import { ParticlesCanvas } from '../components/home/ParticlesCanvas';
+import { FixedFeaturedCards } from '../components/home/FixedFeaturedCards';
+import { SectionReveal } from '../components/home/SectionReveal';
 import { useHeroScrollFade } from '../hooks/useHeroScrollFade';
+import { CARDS_TRIGGER_ID } from '../lib/homeScroll';
 
 const steps = [
-  { n: '01', title: '描述需求', desc: '注册登录后，在许愿池描述你想要的工具或工作流痛点' },
-  { n: '02', title: 'Agnes 分析', desc: '硅基 AI 自动判断可行性，并给出五类实现路径' },
-  { n: '03', title: '人工评估', desc: '我会回复是否可开发原型，并更新状态灯' },
-  { n: '04', title: '原型落地', desc: '蓝灯开发中 → 绿灯上线，进入作品集档案' },
+  { n: '01', title: '描述需求', desc: '登录后描述工具需求或流程痛点' },
+  { n: '02', title: 'Agnes 分析', desc: 'AI 判断可行性并给出实现路径' },
+  { n: '03', title: '人工评估', desc: '回复是否可开发并更新状态灯' },
+  { n: '04', title: '原型落地', desc: '蓝灯开发中 → 绿灯进入作品集' },
 ];
 
 export function Home() {
-  const featured = getFeaturedProjects();
+  const featured = getFeaturedProjects().slice(0, 3);
   const heroOpacity = useHeroScrollFade(0.3);
 
   return (
     <>
-      <HeroAmbientCanvas />
+      <ScrollVideoBackground />
+      <ParticlesCanvas />
+      <FixedFeaturedCards projects={featured} />
 
-      <div className="relative z-10">
+      <div id="content" className="relative z-[2]">
         <section
           id="hero"
-          className="relative flex min-h-screen flex-col transition-opacity duration-150"
+          className="relative flex min-h-screen w-full flex-col"
           style={{ opacity: heroOpacity }}
         >
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-deep/80 via-transparent to-deep/20" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-          <div className="relative z-10 flex flex-1 flex-col items-center justify-end px-4 pb-16 pt-28 text-center md:pb-24">
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="font-mono text-xs tracking-[0.3em] text-neon-purple"
-            >
-              // VIBE CODING WISH NODE
-            </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="mt-4 max-w-4xl font-display text-3xl font-bold leading-tight tracking-wide md:text-5xl lg:text-6xl"
-            >
-              <span className="text-text-primary">你提痛点/需求</span>
-              <br className="hidden sm:block" />
-              <span className="sm:ml-2">
-                <span className="relative inline-block">
-                  <span
-                    className="absolute bottom-1 left-0 h-2 w-full rounded-sm bg-neon-cyan/35 md:h-2.5"
-                    aria-hidden
-                  />
-                  <span className="gradient-text glow-text relative">我做工具/应用</span>
-                </span>
-              </span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mx-auto mt-6 max-w-2xl text-base text-text-muted md:text-lg"
-            >
-              浏览已落地的 Vibe Coding（氛围编程） 项目，或在许愿池发射你的工具需求。
+          <div className="relative z-10 flex flex-1 flex-col items-center justify-end px-4 pb-28 pt-24 text-center md:pb-32">
+            <p className="font-mono text-xs tracking-[0.2em] text-[#9ca3af]">
+              // VIBE CODING（氛围编程）
+            </p>
+            <h1 className="mt-4 max-w-3xl text-3xl leading-[1.15] font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
+              你提痛点/需求
               <br />
-              AI 初筛 + 人工跟进，从红灯到绿灯。
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mt-10 flex flex-wrap justify-center gap-4"
-            >
+              <span className="relative mt-1 inline-block">
+                <span
+                  className="absolute bottom-1 left-0 h-2.5 w-full rounded-sm bg-neon-cyan/50 md:h-3"
+                  aria-hidden
+                />
+                <span className="relative">我做工具/应用</span>
+              </span>
+            </h1>
+
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
               <NeonButton to="/wish/new">发射许愿</NeonButton>
               <NeonButton to="/portfolio" variant="ghost">
                 浏览作品集
               </NeonButton>
-            </motion.div>
-
-            <div className="mx-auto mt-10 flex max-w-md flex-wrap justify-center gap-6 md:mt-12">
-              {(['red', 'yellow', 'blue', 'green'] as const).map((s) => (
-                <StatusOrb key={s} status={s} showLabel size="md" />
-              ))}
             </div>
           </div>
 
           <div className="relative z-10 flex justify-center pb-8">
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-              className="text-text-muted/60"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-6 w-6 animate-bounce text-[#6b7280]"
               aria-hidden
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-              </svg>
-            </motion.div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
           </div>
         </section>
 
-        <div className="border-t border-white/5 bg-deep/95 backdrop-blur-sm">
-          <div className="mx-auto max-w-6xl px-4 py-12">
-            <section className="mb-20">
-              <div className="mb-8 flex items-end justify-between">
-                <div>
-                  <p className="font-mono text-xs text-neon-cyan">ARCHIVE // DEPLOYED</p>
-                  <h2 className="font-display text-2xl tracking-wide">
-                    已完成的代表性应用网站工具
-                  </h2>
-                </div>
-                <Link to="/portfolio" className="font-mono text-xs text-neon-cyan hover:underline">
-                  查看全部 →
-                </Link>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {featured.map((project, i) => (
-                  <ProjectCard key={project.slug} project={project} index={i} />
-                ))}
-              </div>
-            </section>
+        <div className="h-[150vh]" aria-hidden />
+        <div id={CARDS_TRIGGER_ID} className="h-[200vh]" aria-hidden />
+        <div className="h-[100vh]" aria-hidden />
 
-            <section>
-              <p className="mb-2 font-mono text-xs text-neon-purple">PROTOCOL // HOW IT WORKS</p>
-              <h2 className="mb-8 font-display text-2xl tracking-wide">许愿池运作流程</h2>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {steps.map((step) => (
-                  <GlassPanel key={step.n}>
-                    <p className="font-display text-2xl text-neon-cyan/40">{step.n}</p>
-                    <h3 className="mt-2 font-display text-sm tracking-wide">{step.title}</h3>
-                    <p className="mt-2 text-sm text-text-muted">{step.desc}</p>
-                  </GlassPanel>
-                ))}
+        <SectionReveal subtitle="PROTOCOL // HOW IT WORKS" title="许愿池运作流程">
+          <div className="mx-auto grid max-w-3xl gap-6 text-left sm:grid-cols-2">
+            {steps.map((step) => (
+              <div
+                key={step.n}
+                className="rounded-lg border border-white/10 bg-black/30 p-5 backdrop-blur-sm"
+              >
+                <p className="font-display text-lg text-neon-cyan/50">{step.n}</p>
+                <h3 className="mt-1 font-display text-sm tracking-wide text-white">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#9ca3af]">{step.desc}</p>
               </div>
-            </section>
+            ))}
           </div>
-        </div>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Link
+              to="/portfolio"
+              className="font-mono text-xs text-neon-cyan transition hover:underline"
+            >
+              查看全部代表作 →
+            </Link>
+            <Link
+              to="/wish"
+              className="font-mono text-xs text-text-muted transition hover:text-white"
+            >
+              公开许愿池 →
+            </Link>
+          </div>
+        </SectionReveal>
       </div>
     </>
   );

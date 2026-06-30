@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { SITE_NAME } from '../../lib/constants';
 import { UserMenu } from './UserMenu';
@@ -7,9 +8,31 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'text-neon-cyan glow-text' : 'text-text-muted hover:text-neon-cyan'
   }`;
 
-export function Navbar() {
+interface NavbarProps {
+  transparentOnHome?: boolean;
+}
+
+export function Navbar({ transparentOnHome = false }: NavbarProps) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!transparentOnHome) return;
+    const onScroll = () => setScrolled(window.scrollY > 48);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [transparentOnHome]);
+
+  const glass = transparentOnHome && !scrolled;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-deep/80 backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        glass
+          ? 'border-b border-transparent bg-transparent'
+          : 'border-b border-white/5 bg-deep/80 backdrop-blur-xl'
+      }`}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
         <Link to="/" className="group flex shrink-0 items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-neon-cyan/40 bg-neon-cyan/10 font-display text-sm text-neon-cyan shadow-[0_0_16px_rgba(0,240,255,0.2)] group-hover:shadow-[0_0_24px_rgba(0,240,255,0.35)]">

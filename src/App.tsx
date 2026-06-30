@@ -1,4 +1,4 @@
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route, useParams, useLocation } from 'react-router-dom';
 import { SciFiBackground } from './components/layout/SciFiBackground';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
@@ -17,9 +17,12 @@ function ProjectDetailRoute() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
+
   return (
-    <SciFiBackground>
-      <Navbar />
+    <SciFiBackground minimal={isHome}>
+      <Navbar transparentOnHome={isHome} />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
