@@ -34,22 +34,40 @@ export function Home() {
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
           <div className="relative z-10 flex flex-1 flex-col items-center justify-end px-4 pb-28 pt-24 text-center md:pb-32">
-            <p className="font-mono text-xs tracking-[0.2em] text-[#9ca3af]">
-              // VIBE CODING（氛围编程）
+            <p className="font-mono text-xs tracking-[0.25em] text-neon-purple/80 uppercase">
+              // VIBE CODING · 氛围编程
             </p>
-            <h1 className="mt-4 max-w-3xl text-3xl leading-[1.15] font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
-              你提痛点/需求
-              <br />
-              <span className="relative mt-1 inline-block">
-                <span
-                  className="absolute bottom-1 left-0 h-2.5 w-full rounded-sm bg-neon-cyan/50 md:h-3"
-                  aria-hidden
-                />
-                <span className="relative">我做工具/应用</span>
+            <h1 className="mt-5 max-w-3xl font-display text-3xl leading-[1.25] font-bold tracking-wide md:text-5xl lg:text-6xl">
+              <span className="block text-[#c8d6e5]">
+                你提
+                <span className="ml-1 text-neon-cyan drop-shadow-[0_0_24px_rgba(0,240,255,0.35)]">
+                  痛点
+                </span>
+                <span className="text-text-muted/60">/</span>
+                <span className="text-neon-purple/90 drop-shadow-[0_0_20px_rgba(123,97,255,0.3)]">
+                  需求
+                </span>
+              </span>
+              <span className="mt-2 block md:mt-3">
+                <span className="text-[#8b9cb3]">我做</span>
+                <span className="relative ml-1.5 inline-block">
+                  <span
+                    className="absolute bottom-1 left-0 h-2.5 w-full rounded-sm bg-gradient-to-r from-neon-cyan/55 via-neon-purple/45 to-neon-pink/35 md:bottom-1.5 md:h-3"
+                    aria-hidden
+                  />
+                  <span className="gradient-text glow-text relative">工具/应用</span>
+                </span>
               </span>
             </h1>
+            <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-[#9ca3af] md:text-base">
+              浏览已落地项目，或在许愿池发射你的工具需求
+              <span className="text-text-muted/70"> · </span>
+              <span className="text-neon-cyan/70">AI 初筛</span>
+              <span className="text-text-muted/50"> + </span>
+              <span className="text-status-green/80">人工跟进</span>
+            </p>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:mt-10 md:gap-4">
               <NeonButton to="/wish/new">发射许愿</NeonButton>
               <NeonButton to="/portfolio" variant="ghost">
                 浏览作品集
