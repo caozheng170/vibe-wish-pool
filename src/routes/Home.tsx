@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getFeaturedProjects } from '../data/portfolio';
 import { NeonButton } from '../components/ui/NeonButton';
+import { StatusOrb } from '../components/ui/StatusOrb';
 import { ScrollVideoBackground } from '../components/home/ScrollVideoBackground';
 import { ParticlesCanvas } from '../components/home/ParticlesCanvas';
 import { FixedFeaturedCards } from '../components/home/FixedFeaturedCards';
@@ -73,6 +74,12 @@ export function Home() {
               <NeonButton to="/portfolio" variant="ghost">
                 浏览作品集
               </NeonButton>
+            </div>
+
+            <div className="mx-auto mt-8 flex max-w-lg flex-wrap justify-center gap-x-6 gap-y-3 md:mt-10">
+              {(['red', 'yellow', 'blue', 'green'] as const).map((s) => (
+                <StatusOrb key={s} status={s} showLabel size="md" />
+              ))}
             </div>
           </div>
 
